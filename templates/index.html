@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Flask Todo App</title>
+	<style type="text/css">
+		div, input, a {
+			box-sizing: border-box;
+		}
+		body {
+			background-color: #00aaff;
+		}
+		.box {
+			width: 500px;
+			margin: 100px auto;
+			padding: 16px;
+			border-radius: 8px;
+			background-color: #ccc;
+		}
+		form {
+			width: 100%;
+			background-color: #ccc;
+			margin-bottom: 24px;
+		}
+		input[type=text] {
+			width: 85%;
+			padding: 8px;
+			font-size: 16px;
+		}
+		input[type=submit] {
+			padding: 8px 16px;
+			font-size: 16px;
+		}
+		.todo {
+			width: 100%;
+			margin-bottom: 16px;
+			padding: 5px;
+			background-color: #fff;
+			border-radius: 5px;
+		}
+		.title {
+			font-size: 20px;
+		}
+		.btn {
+			display: inline-block;
+			padding: 5px 10px;
+			border-radius: 5px;
+			text-decoration: none;
+			color: white;
+			font-variant: small-caps;
+		}
+		.btn-update {
+			background-color: #3dae62;
+		}
+		.btn-del {
+			background-color: #d92626;
+		}
+		.status {
+			margin-right: 8px;
+			font-size: 20px;
+			color: #000;
+		}
+		.btns {
+			float: right;
+		}
+		.pending {
+			display: flex;
+			text-align: right;
+			margin-bottom: 8px;
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<h1>Today's Todos</h1>
+	<form action="add" method="post">
+		<input type="text" name="title" required autofocus placeholder="Enter a new todo..." maxlength="30">
+		<input type="submit" value="Add">
+	</form>
+	{% for todo in todo_list %}
+	<div class="todo">
+		<span class="status">{% if todo.status %}&#10004;{% else %}&#10008;{% endif %}</span>
+		<span class="title">{{ todo.title }}</span>
+		<span class="btns">
+			<a class="btn btn-update" href="/update/{{ todo.id }}">update</a>
+			<a class="btn btn-del" href="/delete/{{ todo.id }}">delete</a>
+		</span>
+	</div>
+	{% endfor %}
+	<div class="pending">
+		You have {{ count }} pending tasks
+	</div>
+</div>
+</body>
+</html>
