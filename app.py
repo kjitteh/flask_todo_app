@@ -15,7 +15,7 @@ class Todo(db.Model):
 	status = db.Column(db.Boolean, default=False)
 
 
-# CRUD Operations: Create, Retrieve, Update Delete
+# CRUD Operations: Create, Read, Update Delete
 
 # Create
 @app.route('/add', methods=['POST'])
@@ -27,7 +27,7 @@ def add():
 	return redirect('/')
 
 
-# Retrieve
+# Read
 @app.route('/')
 def index():
 	todo_list = Todo.query.all()
